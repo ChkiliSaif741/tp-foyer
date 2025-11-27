@@ -25,5 +25,5 @@ public class Bloc {
     @ManyToOne
     Foyer foyer;
     @OneToMany(mappedBy = "bloc")
-    Set<Chambre> Chambre;
+    private Set<Chambre> chambres;
 }

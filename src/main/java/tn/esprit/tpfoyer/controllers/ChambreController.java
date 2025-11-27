@@ -1,5 +1,7 @@
 package tn.esprit.tpfoyer.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +12,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Tag(name = "Gestion des chambres",description = "CRUD des chambres")
 @RequestMapping(value = "/chambre")
 public class ChambreController {
     private final IChambreServiceImp chambreServiceImp;
@@ -29,6 +32,7 @@ public class ChambreController {
         chambreServiceImp.deleteChambreById(id);
     }
 
+    @Operation(summary = "Afficher les chambres")
     @GetMapping
     public List<Chambre> getAllChambre() {
         return chambreServiceImp.findAllChambres();

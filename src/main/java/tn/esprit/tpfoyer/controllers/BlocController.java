@@ -2,7 +2,9 @@ package tn.esprit.tpfoyer.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.dto.AffecterChambresRequest;
 import tn.esprit.tpfoyer.entity.Bloc;
+import tn.esprit.tpfoyer.entity.Chambre;
 import tn.esprit.tpfoyer.services.IBlocServiceImp;
 
 import java.util.List;
@@ -36,5 +38,10 @@ public class BlocController {
     @GetMapping("{id}")
     public Bloc getBlocById(@PathVariable Long id) {
         return blocService.findBlocById(id);
+    }
+
+    @PostMapping("affecter")
+    public List<Chambre> affecterChambresABloc(@RequestBody AffecterChambresRequest dto) {
+        return blocService.affecterChambresABloc(dto.getNumChambres(), dto.getNomBloc());
     }
 }
