@@ -10,4 +10,6 @@ public interface IReservationService {
     void deleteReservation(Reservation reservation);
     Reservation findReservation(Long id);
     List<Reservation> findAllReservations();
+    public Reservation ajouterReservation (long idBloc, long cinEtudiant) ;
+    Reservation annulerReservation(long cinEtudiant);
 }

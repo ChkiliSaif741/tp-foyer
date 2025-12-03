@@ -42,4 +42,9 @@ public class ChambreController {
     public Chambre getChambreById(@PathVariable Long id) {
         return chambreServiceImp.findChambreById(id);
     }
+
+    @GetMapping("byUniveritse/{nomUniversite}")
+    public List<Chambre> getChambresParNomUniversite(@PathVariable String nomUniversite){
+        return chambreServiceImp.getChambresParNomUniversite(nomUniversite);
+    }
 }

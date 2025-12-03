@@ -8,6 +8,7 @@ import tn.esprit.tpfoyer.repositories.BlocReposotory;
 import tn.esprit.tpfoyer.repositories.ChambreRepository;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class IBlocServiceImp implements IBlocService{

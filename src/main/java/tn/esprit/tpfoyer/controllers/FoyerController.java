@@ -2,6 +2,7 @@ package tn.esprit.tpfoyer.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.tpfoyer.dto.UniversiteDTO;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.services.IFoyerServiceImp;
@@ -18,7 +19,17 @@ public class FoyerController {
     }
 
     @PostMapping("/{id}")
-    public Foyer affecterFoyerAUniversite(@PathVariable Long id, @RequestBody Universite universite) {
-        return foyerService.affecterFoyerAUniversite(id, universite);
+    public Foyer affecterFoyerAUniversite(@PathVariable Long id,@RequestBody UniversiteDTO universiteDTO) {
+        return foyerService.affecterFoyerAUniversite(id, universiteDTO.getNomUniversite());
+    }
+
+    @PatchMapping("/{id}")
+    public Universite desaffecterFoyerAUniversite (@PathVariable Long idUniversite){
+        return foyerService.desaffecterFoyerAUniversite(idUniversite);
+    }
+
+    @PostMapping("foyeretunuveritse/{id}")
+    public Foyer ajouterFoyerEtAffecterAUniversite(@RequestBody Foyer foyer,@PathVariable long id){
+        return foyerService.ajouterFoyerEtAffecterAUniversite(foyer, id);
     }
 }

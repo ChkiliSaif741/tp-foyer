@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,5 +31,6 @@ public class Etudiant {
     private LocalDate dateNaissance;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonIgnore
     Set<Reservation> reservations2;
 }

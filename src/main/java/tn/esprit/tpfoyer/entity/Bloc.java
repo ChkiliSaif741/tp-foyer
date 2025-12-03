@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +24,10 @@ public class Bloc {
     private Long capaciteBloc;
 
     @ManyToOne
+    @JsonIgnore
     Foyer foyer;
+
     @OneToMany(mappedBy = "bloc")
+    @JsonIgnore
     private Set<Chambre> chambres;
 }

@@ -10,5 +10,6 @@ public interface IChambreServices {
     void deleteChambreById(Long id);
     Chambre findChambreById(Long id);
     List<Chambre> findAllChambres();
+    List<Chambre> getChambresParNomUniversite(String nomUniversite);
 
 }

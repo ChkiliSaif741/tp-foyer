@@ -2,6 +2,7 @@ package tn.esprit.tpfoyer.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.tpfoyer.entity.Bloc;
 import tn.esprit.tpfoyer.entity.Foyer;
 import tn.esprit.tpfoyer.entity.Universite;
 import tn.esprit.tpfoyer.repositories.FoyerRepository;
@@ -42,10 +43,36 @@ public class IFoyerServiceImp implements IFoyerService{
         return foyerRepository.findAll();
     }
 
-    public Foyer affecterFoyerAUniversite(Long idFoyer, Universite universite) {
+    @Override
+    public Foyer affecterFoyerAUniversite (Long idFoyer, String nomUniversite) {
         Foyer foyer = foyerRepository.findById(idFoyer)
                 .orElseThrow(() -> new RuntimeException("Foyer non trouvé"));
+        Universite universite = universiteRepository.findUniversiteByNomUniversiteEquals(nomUniversite);
         foyer.setUniversite(universite);
+        return foyerRepository.save(foyer);
+    }
+
+    @Override
+    public Universite desaffecterFoyerAUniversite(Long idUniversite) {
+        Universite universite = universiteRepository.findById(idUniversite).orElse(null);
+        Foyer foyer = foyerRepository.findByUniversiteEquals(universite);
+        foyer.setUniversite(null);
+        return universite;
+    }
+
+    @Override
+    public Foyer ajouterFoyerEtAffecterAUniversite(Foyer foyer, long idUniversite) {
+        Universite universite = universiteRepository.findById(idUniversite)
+                .orElseThrow(() -> new RuntimeException("Université non trouvée"));
+
+        foyer.setUniversite(universite);
+
+        if (foyer.getBlocset() != null) {
+            for (Bloc bloc : foyer.getBlocset()) {
+                bloc.setFoyer(foyer);
+            }
+        }
+
         return foyerRepository.save(foyer);
     }
 }

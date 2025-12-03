@@ -1,5 +1,6 @@
 package tn.esprit.tpfoyer.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -23,7 +24,8 @@ public class Chambre {
     private TypeChambre typeC;
 
     @ManyToOne
+    @JsonIgnore
     Bloc bloc;
-    @OneToMany(cascade = CascadeType.ALL)
-    List<Reservation> reservations;
+    @OneToMany(mappedBy = "chambre", cascade = CascadeType.ALL)
+    private List<Reservation> reservations;
 }
